@@ -1,9 +1,9 @@
 import Swal from "sweetalert2";
 
-const PaymentDetails = ({ payments, index,refetch}) => {
-  const { bitcoinAddress,address, price, email, practice, status, date, _id } = payments;
+const PaymentDetails = ({ payments, index, refetch }) => {
+  const { bitcoinAddress, address, price, email, practice, status, date, _id } = payments;
   // pending user approve function
-  const handleStatus = ( payments,status) => {
+  const handleStatus = (payments, status) => {
 
     fetch(
       `http://localhost:5000/payments-history/${payments._id}/?status=${status}`,
@@ -13,9 +13,9 @@ const PaymentDetails = ({ payments, index,refetch}) => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+
         if (data.modifiedCount > 0) {
-     refetch()
+          refetch()
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -37,14 +37,17 @@ const PaymentDetails = ({ payments, index,refetch}) => {
         <td className="border px-4 py-2">{bitcoinAddress || 'Stipe Pay'}</td>
         <td className="border px-4 py-2">${price}</td>
         {/* <td className="border px-4 py-2">{status || 'anonymous'}</td> */}
-        <td  className="border px-4 py-2">
+        <td className="border px-4 py-2">
+          {status === 'approved' ?
+            <> <p style={{ color: 'green', fontSize: 'bold', }} >{status}</p> </> :
+            <> <p style={{ color: 'red', fontSize: 'bold', }}>{status}</p></>
+          }
           {" "}
-          <button className="btn bnt-primary btn-sm">{status}</button>{" "}
         </td>
         {
           <>
             {" "}
-            <td  className="border px-4 py-2">
+            <td className="border px-4 py-2">
               <button
                 // disabled={status === "deny" || status === "approved"}
                 onClick={() => handleStatus(payments, "approved")}
@@ -53,7 +56,7 @@ const PaymentDetails = ({ payments, index,refetch}) => {
                 Approve
               </button>
             </td>
-            <td  className="border px-4 py-2">
+            <td className="border px-4 py-2">
               <button
                 // disabled={status === "deny" || status === "approved"}
                 onClick={() => handleStatus(payments, "deny")}

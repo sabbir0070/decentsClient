@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [paymentData, refetch] = usePaymentHistory();
-console.log(paymentData);
   const navigate = useNavigate();
 
   const handleBackHome = () => {

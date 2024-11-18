@@ -47,7 +47,6 @@ const AddtoCart = () => {
 
     axios.post('http://localhost:5000/payments', payment)
       .then(data => {
-        console.log(data);
         if (data?.data.insertedId) {
           Swal.fire({
             position: "top-end",
@@ -60,7 +59,7 @@ const AddtoCart = () => {
         }
       })
       .catch((error) => {
-        console.log(error);
+  setError(error)
       })
   }
 
@@ -103,7 +102,7 @@ const AddtoCart = () => {
           <input type="text" placeholder={t("Medical Practice")} required value={practice} onChange={(e) => setPractice(e.target.value)} />
           <input type="text" placeholder={t("Provide Your Bitcoin Address")} required value={bitcoinAddress} onChange={(e) => sectBitcoinAddress(e.target.value)} />
           {error && <p style={{ color: "red" }}>{error}</p>}
-          <button type='submit'>Confirm Now</button>
+          <button type='submit'>Send Bitcoin</button>
         </form>
 
 

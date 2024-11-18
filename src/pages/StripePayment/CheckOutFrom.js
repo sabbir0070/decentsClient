@@ -26,12 +26,14 @@ const CheckOutFrom = () => {
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
+if(amount === 100){
     axiosSecure.post('/create-payment-intent', { price: amount })
       .then(res => {
         console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret);
-      })
-  }, [axiosSecure, amount])
+      })}
+  },[axiosSecure, amount])
+
   // const [succeeded, setSucceeded] = useState('');
 
   const handleClickClosed = () => {

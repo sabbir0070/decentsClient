@@ -215,7 +215,6 @@ const PlantVids = () => {
 
         
     ]);
-    console.log(setPlants);
     return (
         <div className="plant-container">
             {plant.map((val, key) => {

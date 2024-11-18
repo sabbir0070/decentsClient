@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import '../App.css';
-import Description from "../info/description";
 import Plants from "./Plants";
-import { Button, Modal } from "react-bootstrap";
+
+import ApothecaryData from "./ApothecaryData";
+
 const Apothecary = () => {
-  //Price: BTC
-  //Medical Rating: 
-  //Source:
+  // Price: BTC
+  // Medical Rating: 
+  // Source:
   const [plant, setPlants] = useState(
     [
       {
@@ -1677,87 +1680,20 @@ const Apothecary = () => {
 
     ]
   );
-  console.log(setPlants);
 
-  //  Modal create
-  const [show, setShow] = useState(false);
-
-  const handleShow = (e) => {
-    e.stopPropagation(); // Prevents event bubbling
-    setShow(true);
-  }
-
-  const handleClose = (e) => {
-    e.stopPropagation(); // Prevents event bubbling
-    setShow(false);
-  }
 
   return (
 
     <div>
-<div className="plant-container">
-      {plant.map((val, key) => {
-        return (
-          <div key={key} className="contain">
-            <img className='pic1' src={val.image} alt="" />
+      <div className="plant-container">
+      
+          {plant.map((val) => (
+            <ApothecaryData val={val} key={val.id}>
 
-            <h3>{val.name}</h3>
-            <h3>{val.price} BTC</h3>
-            <h3>Medical Rating: {val.medrating}</h3>
-            <>
-              <Button variant="primary" size="sm" onClick={handleShow}>
-                <h3>Description</h3>
-              </Button>
-
-              <Modal show={show} onHide={handleClose}
-                dialogClassName="modal-half-page"
-                aria-labelledby="example-custom-modal-styling-title"
-                centered
-                scrollable
-                size="xl"
-                // dialogClassName="modal-half-page"
-
-              >
-                <Modal.Header>
-                  <Modal.Title id="example-custom-modal-styling-title" >Modal scrollable</Modal.Title>
-                  {/* <Button variant="secondary" onClick={handleClose}>
-                                        Close
-                                    </Button> */}
-                  <Button
-                    variant="link"
-                    onClick={handleClose}
-                    style={{
-                      position: 'absolute',
-                      top: '10px',
-                      right: '15px',
-                      fontSize: '2.5rem',
-                      color: 'red',
-                    }}
-                  >
-                  &times;
-                  </Button>
-
-                </Modal.Header>
-                <Modal.Body>
-                  <div style={{ height: '600px', overflowY: 'scroll' }}>
-                    <p className="wpr"  >Description: {val.description}</p>
-                  </div>
-                  {/* Add more content to make the modal scrollable */}
-                </Modal.Body>
-              </Modal>
-            </>
-
-            <h3>
-              <a href={val.source} target="_blank" rel="noopener noreferrer">Source</a>
-            </h3>
-            <Description />
-          </div>
-        )
-      })}
-
-
+            </ApothecaryData>))
+          }
+      </div>
     </div>
-</div>
   );
 };
 

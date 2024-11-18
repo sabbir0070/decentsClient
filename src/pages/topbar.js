@@ -12,8 +12,6 @@ const Topbar = () => {
   const { t } = useTranslation();
   const { user, logOut } = useContext(AuthContext)
   const [isAdmin, setIsAdmin] = useAdmin();
-
-  console.log(user?.email);
   const handleLogOut = () => {
     logOut()
       .then(() => { })
@@ -42,32 +40,31 @@ const Topbar = () => {
             <Nav.Link href='/about'> {t('About Us')}
             </Nav.Link>
 
-            {
-              user ? <>
-                <button
-                  style={{
-                    backgroundColor: 'blue', gap: '10px', color: 'white', padding: '6px 18px',
-                    fontWeight: "bold", border: 'none', borderRadius: '5px'
-                  }}
-                  onClick={handleLogOut} className="l"> LogOut </button> </> : <> <Nav.Link
-                    style={{
-                      backgroundColor: 'blue', color: 'white',
-                      padding: '6px 18px', fontWeight: "bold", border: 'none', borderRadius: '5px',
-                    }}
-                    href='/login'> {t('Login')}  </Nav.Link> </>
+            {isAdmin &&
+              <Nav.Link href='/dashboard'>  <button style={{
+                backgroundColor: 'blue', color: 'white',
+                padding: '8px 16px', fontWeight: "bold", border: 'none',
+                borderRadius: '5px', marginBottom: window.innerWidth <= 768 ? '10px' : '7px',
+              }}>
+                {t('Dashboard')}
+              </button>
+              </Nav.Link>
             }
           </Nav>
 
-          {isAdmin &&
-            <Nav.Link href='/dashboard'>  <button style={{
-              backgroundColor: 'blue', color: 'white',
-              padding: '8px 20px', fontWeight: "bold", border: 'none',
-              borderRadius: '5px', marginTop: window.innerWidth <= 768 ? '10px' : '7px',
-            }}>
-              {t('Dashboard')}
-            </button>
-            </Nav.Link>
-
+          {
+            user ? <>
+              <button
+                style={{
+                  backgroundColor: 'blue', gap: '10px', color: 'white', padding: '8px 18px',
+                  fontWeight: "bold", border: 'none', borderRadius: '5px'
+                }}
+                onClick={handleLogOut} className="l"> LogOut </button> </> : <> <Nav.Link
+                  style={{
+                    backgroundColor: 'blue', color: 'white',
+                    padding: '8px 18px', fontWeight: "bold", border: 'none', borderRadius: '5px',
+                  }}
+                  href='/login'> {t('Login')}  </Nav.Link> </>
           }
         </Navbar.Collapse>
       </Navbar>

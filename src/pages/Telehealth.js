@@ -5,7 +5,7 @@ import Practices from '../info/practices';
 import Info7 from '../info/info7';
 import Practice from './practices';
 import { Helmet } from 'react-helmet'; // Import Helmet
-import { useContext, useEffect, useState } from 'react';
+import { useContext} from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from './Providers/AuthProvider';
 
@@ -13,7 +13,6 @@ import { AuthContext } from './Providers/AuthProvider';
 export function Telehealth({ t }) {
 
     const { user } = useContext(AuthContext);
-    console.log(user?.email);
     const { loading, data: paymentsInformation } = useQuery({
         queryKey: ['paymentsInformation'],
         queryFn: async () => {
@@ -29,12 +28,6 @@ export function Telehealth({ t }) {
     const paymentsByEmail = paymentsInformation?.find(
         (payment) => (payment?.email === user?.email && payment.status === 'approved')
     );
-
-
-    console.log(paymentsByEmail, 54);
-    console.log('No payments found for', paymentsByEmail);
-
-
 
     return (
         <>

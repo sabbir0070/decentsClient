@@ -7,7 +7,6 @@ const useAdmin = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isAdminLoading, setIsAdminLoading] = useState(true);
   const [users] = useUsers(); // Assuming this fetches all users from MongoDB
-console.log(users);
   useEffect(() => {
     // Only proceed if user and users data is available
     if (!loading && user?.email) {

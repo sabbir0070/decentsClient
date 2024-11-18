@@ -20,7 +20,7 @@ const Register = () => {
     createUser(data.email, data.password)
       .then(result => {
         updatePhoto(data.name).then((result) => {
-          console.log(result);
+
           const saveUser = { name: data.name, email: data.email,role:"user"  };
           fetch(`http://localhost:5000/users`, {
             method: "POST",
@@ -31,7 +31,6 @@ const Register = () => {
           })
             .then(res => res.json())
             .then(data => {
-              console.log(data.insertedId);
             });
           reset();
           Swal.fire({

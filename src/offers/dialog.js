@@ -26,7 +26,6 @@ export default function CustomizedDialogs({ children }) {
 
   const handleClickOpen = () => {
     if (user && user?.email) {
-      console.log(user.email);
       setOpen(true);
       return navigate('/addtocart', { state: { from: location } })
     }

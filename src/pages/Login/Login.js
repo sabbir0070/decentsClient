@@ -27,10 +27,8 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
     signInUser(data.email, data.password)
       .then((result) => {
-        console.log(result.user);
         setError('');
         Swal.fire({
           title: 'Success!',

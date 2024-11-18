@@ -3,7 +3,6 @@ import  { useState, useEffect } from 'react';
 const useUsers = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-console.log(users);
   // Fetch the users from the backend
   useEffect(() => {
     const fetchAgents = async () => {

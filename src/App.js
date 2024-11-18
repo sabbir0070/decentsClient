@@ -107,8 +107,6 @@ function App() {
           <Route path="/addtocart" element={<AddtoCart t={t} />} />
           <Route path="/dashboard" element={<PrivateRoute  ><Dashboard t={t} /></PrivateRoute>} />
           <Route element={<Topbar t={t} />} />
-
-
         </Routes>
       </AuthProvider>
     </QueryClientProvider >

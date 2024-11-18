@@ -3,7 +3,7 @@ import "../App.css"
 import { CookiesProvider } from 'react-cookie'
 import CustomizedDialogs from './dialog'
 import { useTranslation } from 'react-i18next'
-import imge from '../images copy/square.png';
+import imge from '../images copy/stripe.jpg';
 import Swal from 'sweetalert2'
 import { useLocation, useNavigate } from 'react-router-dom'
 import useAuth from '../Hooks/useAuth'
@@ -17,7 +17,6 @@ const Offer2 = () => {
   const { user } = useAuth();
   const handleClickOpen = () => {
     if (user && user?.email) {
-      console.log(user.email);
       setOpen(true);
       return navigate('/stripepay', { state: { from: location } })
     }
