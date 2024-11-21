@@ -1,5 +1,5 @@
 {
-    "homepage": "https://themerlingroupworld.com",
+    "homepage": "https://themerlingroupworlds.com",
     "name": "dmedwebapp",
     "version": "0.1.0",
     "private": false,
@@ -81,6 +81,7 @@
         ]
     },
     "devDependencies": {
+        "css-minimizer-webpack-plugin": "^7.0.0",
         "gh-pages": "^4.0.0"
     }
 }
