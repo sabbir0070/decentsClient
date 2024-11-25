@@ -21,3 +21,4 @@ yarn-error.log*
 courses.js
 # Local Netlify folder
 .netlify
+.env
