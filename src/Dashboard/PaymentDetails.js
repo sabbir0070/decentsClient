@@ -1,12 +1,13 @@
 import Swal from "sweetalert2";
 
 const PaymentDetails = ({ payments, index, refetch }) => {
-  const { bitcoinAddress, address, price, email, practice, status, date, _id } = payments;
+  const { bitcoinAddress, name, price, email, practice, status, date, } = payments;
+console.log(payments);
   // pending user approve function
   const handleStatus = (payments, status) => {
 
     fetch(
-      `http://localhost:5000/payments-history/${payments._id}/?status=${status}`,
+      `http://localhost:5001/payments-history/${payments._id}/?status=${status}`,
       {
         method: "PATCH",
       }
@@ -34,6 +35,7 @@ const PaymentDetails = ({ payments, index, refetch }) => {
         <th className="border px-4 py-2"> {index + 1}</th>
         <td className="border px-4 py-2">{email}</td>
         <td className="border px-4 py-2">{practice}</td>
+       
         <td className="border px-4 py-2">{bitcoinAddress || 'Stipe Pay'}</td>
         <td className="border px-4 py-2">${price}</td>
         {/* <td className="border px-4 py-2">{status || 'anonymous'}</td> */}

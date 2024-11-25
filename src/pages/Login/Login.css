@@ -135,7 +135,10 @@
     font-size: 0.9rem; /* Adjust input font size */
     padding: 0.5rem; /* Slightly reduce padding */
   }
+.forget-pass{
+margin: 10px auto;
 
+}
   .password-toggle {
     top: 2rem; /* Adjust position for smaller inputs */
   }

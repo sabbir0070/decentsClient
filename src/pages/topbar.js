@@ -1,21 +1,38 @@
 // import React from 'react';
-import LOGO from "../images copy/LOGO.png";
-import '../App.css';
+import { useContext } from "react";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import EducationMenu from './EducationMenu';
 import { useTranslation } from 'react-i18next';
-import { useContext } from "react";
-import { AuthContext } from "./Providers/AuthProvider";
+import '../App.css';
 import useAdmin from "../Hooks/useAdmin";
+import LOGO from "../images copy/LOGO.png";
+import EducationMenu from './EducationMenu';
+import { AuthContext } from "./Providers/AuthProvider";
+
+
 const Topbar = () => {
   const { t } = useTranslation();
   const { user, logOut } = useContext(AuthContext)
-  const [isAdmin, setIsAdmin] = useAdmin();
+
+  const [isAdmin, isAdminLoading] = useAdmin()
+  console.log(isAdmin);
+  //   const handleLogout = async () => {
+  //   try {
+  //     await axios.post('http://localhost:5001/api/logout', {}, { withCredentials: true });
+  //     setUser(null);
+  //     navigate('/login', { replace: true });
+  //   } catch (error) {
+  //     console.error('Logout failed:', error);
+  //   }
+  // };
+
   const handleLogOut = () => {
     logOut()
       .then(() => { })
-      .catch(error => console.log(error));
+      .then(window.location.reload())
+      .catch(error => {
+        console.log(error.message);
+      })
   }
 
   return (
@@ -40,15 +57,15 @@ const Topbar = () => {
             <Nav.Link href='/about'> {t('About Us')}
             </Nav.Link>
 
-            {isAdmin &&
-              <Nav.Link href='/dashboard'>  <button style={{
+            {!isAdminLoading && isAdmin &&
+              (<Nav.Link href='/dashboard'>  <button style={{
                 backgroundColor: 'blue', color: 'white',
                 padding: '8px 16px', fontWeight: "bold", border: 'none',
                 borderRadius: '5px', marginBottom: window.innerWidth <= 768 ? '10px' : '7px',
               }}>
                 {t('Dashboard')}
               </button>
-              </Nav.Link>
+              </Nav.Link>)
             }
           </Nav>
 

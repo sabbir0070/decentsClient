@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const useUsers = () => {
   const [users, setUsers] = useState([]);
@@ -7,7 +7,7 @@ const useUsers = () => {
   useEffect(() => {
     const fetchAgents = async () => {
       try {
-        const response = await fetch("http://localhost:5000/users");
+        const response = await fetch("http://localhost:5001/users");
         const data = await response.json();
         setUsers(data);
         setLoading(false);

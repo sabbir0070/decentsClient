@@ -4,7 +4,7 @@ import React from 'react';
 import CheckOutFrom from './CheckOutFrom';
 
 // const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
-const stripePromise = loadStripe('pk_test_51NF8n6ImvR8QJMZg4Cr7c8uzhA5PW9hTE5vRACXqtsX4ZkNf74RyMZr8SD5u9o9uTWcVNTIxlv0TnuQoaoAdWx5x00qsz4u0np');
+const stripePromise = loadStripe(process.env.REACT_APP_PAYMENT_GATEWAY_PK);
 
 const StripePayment = () => {
 

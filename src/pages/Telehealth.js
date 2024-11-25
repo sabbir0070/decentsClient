@@ -1,22 +1,23 @@
-import '../App.css';
-import Topbar from './topbar';
-import Footer from '../footer';
-import Practices from '../info/practices';
-import Info7 from '../info/info7';
-import Practice from './practices';
-import { Helmet } from 'react-helmet'; // Import Helmet
-import { useContext} from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useContext } from 'react';
+import { Helmet } from 'react-helmet'; // Import Helmet
+import '../App.css';
+import Footer from '../footer';
+import Info7 from '../info/info7';
+import Practices from '../info/practices';
+import Practice from './practices';
 import { AuthContext } from './Providers/AuthProvider';
+import Topbar from './topbar';
 
 
 export function Telehealth({ t }) {
 
     const { user } = useContext(AuthContext);
+console.log(user,'telehealth');
     const { loading, data: paymentsInformation } = useQuery({
         queryKey: ['paymentsInformation'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/payments');
+            const res = await fetch('http://localhost:5001/payments');
             return res.json();
         }
     })

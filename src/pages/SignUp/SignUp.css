@@ -69,6 +69,18 @@ font-size: bold;
 }
 
 
+.password-field {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 2.3rem;
+  right: 1rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
 /* Divider */
 .divider {
 
@@ -78,6 +90,7 @@ font-size: bold;
   font-size: 1rem;
   font-weight: 600;
 }
+
 
 
 /* Responsive Styles */

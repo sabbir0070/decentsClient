@@ -1,14 +1,15 @@
 
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../Providers/AuthProvider';
-import { useTranslation } from 'react-i18next';
-import useAxiosSecure from '../../Hooks/useAxiosSecure';
-import Swal from 'sweetalert2';
-import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+
 // import '../../App.css'
-import './CheckOutForm.css'
+import { AuthContext } from '../Providers/AuthProvider';
+import './CheckOutForm.css';
 const CheckOutFrom = () => {
 
   const { t } = useTranslation();
@@ -22,17 +23,18 @@ const CheckOutFrom = () => {
   const [amount, setAmount] = useState(100);
   const [closed, setClosed] = useState(false);
   const { user } = useContext(AuthContext)
-  const axiosSecure = useAxiosSecure('');
+  const [axiosSecure] = useAxiosSecure();
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
-if(amount === 100){
-    axiosSecure.post('/create-payment-intent', { price: amount })
-      .then(res => {
-        console.log(res.data.clientSecret);
-        setClientSecret(res.data.clientSecret);
-      })}
-  },[axiosSecure, amount])
+    if (amount === 100) {
+      axiosSecure.post('/create-payment-intent', { price: amount })
+        .then(res => {
+          console.log(res.data.clientSecret);
+          setClientSecret(res.data.clientSecret);
+        })
+    }
+  }, [axiosSecure, amount])
 
   // const [succeeded, setSucceeded] = useState('');
 
@@ -45,6 +47,7 @@ if(amount === 100){
   }
 
   const handleSubmit = async (event) => {
+    console.log(user, 'checkoutForm');
     event.preventDefault();
 
     if (!stripe || !elements) {
@@ -60,13 +63,14 @@ if(amount === 100){
 
     setIsProcessing(true);
 
+
     // Create the payment method first
     const { error: paymentMethodError, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card,
       billing_details: {
-        name: user?.displayName || 'anonymous',
-        email: user?.email || 'anonymous@example.com',
+        name: user?.displayName,
+        email: user?.email,
       },
     });
 
@@ -87,7 +91,7 @@ if(amount === 100){
     });
     if (confirmError) {
       setMessage(`Payment confirmation failed: ${confirmError.message}`);
-      console.log(confirmError.message);
+      console.log(`ata ki seta${confirmError.message}`);
       setIsProcessing(false)
     }
 
@@ -95,6 +99,7 @@ if(amount === 100){
     if (paymentIntent.status === 'succeeded') {
       setMessage('Payment successful!');
       const payment = {
+        name: user?.displayName,
         email: user?.email,
         practice: practice,
         price: amount,
@@ -102,7 +107,7 @@ if(amount === 100){
         transaction: paymentIntent.id,
         date: new Date()   // utc date convert. use moment js 
       }
-      axios.post('http://localhost:5000/payments', payment)
+      axios.post('http://localhost:5001/payments', payment)
         .then(data => {
           console.log(data);
           if (data?.data.insertedId) {
@@ -112,16 +117,21 @@ if(amount === 100){
               title: "Your Payment Successful",
               showConfirmButton: false,
               timer: 1500
+            }).then(() => {
+              window.location.href = "/telehealth"; // Replace "/another-route-path" with the desired route
             });
 
           }
         })
+        .catch(error => {
+          console.log(error);
+        })
 
     }
 
-
-
+    console.log('checkoutform');
     setIsProcessing(false);
+
   };
 
   return (
@@ -149,7 +159,7 @@ if(amount === 100){
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Name"
+          placeholder="Enter your name"
           value={user?.displayName}
           onChange={(e) => setName(e.target.value)}
           required

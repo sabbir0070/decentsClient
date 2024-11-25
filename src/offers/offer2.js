@@ -16,7 +16,7 @@ const Offer2 = () => {
   const location = useLocation();
   const { user } = useAuth();
   const handleClickOpen = () => {
-    if (user && user?.email) {
+    if (user) {
       setOpen(true);
       return navigate('/stripepay', { state: { from: location } })
     }

@@ -7,11 +7,11 @@ import { useQuery } from '@tanstack/react-query';
 const usePaymentHistory = () => {
   const { loading } = useContext(AuthContext)
 
-  const { data: paymentData,refetch = [], } = useQuery({
+  const { data: paymentData, refetch = [], } = useQuery({
     queryKey: ['paymentData'],
     enabled: !loading,
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/payments-history`);
+      const res = await fetch(`http://localhost:5001/payments-history`);
       return res.json();
     },
   })

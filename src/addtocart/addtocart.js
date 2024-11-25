@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
-import { useTranslation } from 'react-i18next'; // Import useTranslation hook
-import '../App.css';
 import axios from 'axios';
-import { AuthContext } from '../pages/Providers/AuthProvider';
-import Swal from 'sweetalert2';
+import { QRCodeSVG } from 'qrcode.react';
+import React, { useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 import { useLocation, useNavigate } from 'react-router-dom';
-import {QRCodeSVG} from 'qrcode.react';   
+import Swal from 'sweetalert2';
+import '../App.css';
+import { AuthContext } from '../pages/Providers/AuthProvider';
 
 
 const AddtoCart = () => {
@@ -13,7 +13,7 @@ const AddtoCart = () => {
   const { t } = useTranslation();
   const [name, setName] = useState('');
   const [practice, setPractice] = useState('');
-  const [bitcoinAddress, sectBitcoinAddress] = useState('');
+  const [bitcoinAddress, setBitcoinAddress] = useState('');
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
@@ -45,7 +45,7 @@ const AddtoCart = () => {
 
     setError(""); // Clear any previous error
 
-    axios.post('http://localhost:5000/payments', payment)
+    axios.post('http://localhost:5001/payments', payment)
       .then(data => {
         if (data?.data.insertedId) {
           Swal.fire({
@@ -54,10 +54,19 @@ const AddtoCart = () => {
             title: "Your Payment Successful",
             showConfirmButton: false,
             timer: 1500
-          });
+          }).then(() => {
+          // Refresh the page after showing success
+          window.location.href = "/telehealth"; // Replace "/another-route-path" with the desired route
+        });
 
         }
       })
+
+    // Clear input fields after successful payment
+        setName("");
+        setPractice("");
+        setBitcoinAddress("")
+
       .catch((error) => {
   setError(error)
       })
@@ -100,7 +109,7 @@ const AddtoCart = () => {
         <form onSubmit={handleSubmit}>
           <input type="text" placeholder={t('Name')} value={user?.displayName} required onChange={(e) => setName(e.target.value)} />
           <input type="text" placeholder={t("Medical Practice")} required value={practice} onChange={(e) => setPractice(e.target.value)} />
-          <input type="text" placeholder={t("Provide Your Bitcoin Address")} required value={bitcoinAddress} onChange={(e) => sectBitcoinAddress(e.target.value)} />
+          <input type="text" placeholder={t("Provide Your Bitcoin Address")} required value={bitcoinAddress} onChange={(e) => setBitcoinAddress(e.target.value)} />
           {error && <p style={{ color: "red" }}>{error}</p>}
           <button type='submit'>Send Bitcoin</button>
         </form>

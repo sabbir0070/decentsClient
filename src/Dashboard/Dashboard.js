@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
   const [paymentData, refetch] = usePaymentHistory();
   const navigate = useNavigate();
-
+console.log(paymentData,'dahsborad');
   const handleBackHome = () => {
     navigate('/'); // Replace '/' with your home route
   };
@@ -38,6 +38,7 @@ const Dashboard = () => {
             </thead>
             <tbody>
               {paymentData?.map((payments, index) => <PaymentDetails
+
                 key={payments._id}
                 payments={payments}
                 index={index}

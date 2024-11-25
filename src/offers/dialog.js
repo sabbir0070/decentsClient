@@ -8,6 +8,8 @@ import DialogContent from '@mui/material/DialogContent';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../pages/Providers/AuthProvider';
+import { useContext } from 'react';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -22,10 +24,10 @@ export default function CustomizedDialogs({ children }) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useAuth();
+  const { user } = useContext(AuthContext);
 
   const handleClickOpen = () => {
-    if (user && user?.email) {
+    if (user) {
       setOpen(true);
       return navigate('/addtocart', { state: { from: location } })
     }

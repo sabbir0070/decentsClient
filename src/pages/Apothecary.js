@@ -1,5 +1,5 @@
-import React, {useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from "react";
 
 import '../App.css';
 import Plants from "./Plants";
@@ -1031,7 +1031,7 @@ const Apothecary = () => {
         image: Plants.gymnemasylvestre,
         name: "Gymnema sylvestre",
         description: "Gurmar is an important, bitter-tasting Ayurvedic herb that is used especially to reduce blood sugar levels in diabetics[304 ]. Both roots and leaves can be used[304 ]. The plant contains a group of oleanane type triterpenoid saponins known as gymnemic acids, a complex mixture of at least 9 closely related acidic glycosides, which have taste-modifying activity; and gurmarin, which is a sweet taste-suppressing polypeptide. When the leaf is chewed, the ability to taste sweetness is lost temporarily[299 ]. Studies have demonstrated that the leaf powder may exert an antidiabetic effect via a number of pathways, including decreasing the uptake of glucose from the small intestine; improvements in glycogen synthesis, glycolysis, gluconeogenesis, and hepatic and muscle glucose uptake; as well as the reversal of haemoglobin and plasma protein glycosylation[299 ]. The plant is antidote, astringent, diuretic, emetic, hypoglycaemic, purgative, refrigerant, stomachic and tonic[304 ]. It is used particularly to reduce sugar levels in the blood and urine[304 ]. The leaves are used in the treatment of fevers and coughs[299 ]. The powdered leaf is considered to help curb cravings for sweets and to have lipid lowering effects, it is added to food additives as a weight loss remedy[299 ]. The powder also helps in preventing caries[299 ]. Applied externally the leaves are combined with castor oil and used as a poultice to treat swollen glands[304 ]. The roots are considered to be a useful antidote to snakebite - they are applied to the wound as a powder, made into a paste with water or given internally as a decoction[299 , 304 ]. The pounded and cooked roots are added to food and eaten as a treatment for epilepsy[299 ]. The pounded cooked root or root powder is applied externally to treat boils[299 ].",
-        price: 0.000456000500000001,
+        price: 0.000456000500100001,
         medrating: 4,
         source: "https://pfaf.org/user/Plant.aspx?LatinName=Gymnema+sylvestre"
       },
