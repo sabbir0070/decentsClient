@@ -22,3 +22,4 @@ courses.js
 # Local Netlify folder
 .netlify
 .env
+env
